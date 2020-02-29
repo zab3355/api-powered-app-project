@@ -123,7 +123,6 @@ const addCoffee = (request, response, body) => {
   }  
   // return the appropriate response code
   return respondJSONMeta(request, response, responseCode);
-  }
 
 coffee.push({
     name: body.name,
@@ -133,14 +132,14 @@ coffee.push({
     rating: body.rating,
 });
 
-//responseJSON.message = 'Added coffee to the database!';
-  //  return respondJSON(request, response, responseCode, responseJSON);
-
-
-  if (responseCode === 201) {
-    responseJSON.message = 'Added coffee to the database!';
+responseJSON.message = 'Added coffee to the database!';
     return respondJSON(request, response, responseCode, responseJSON);
-  };
+};
+
+
+ // if (responseCode === 201) {
+   // responseJSON.message = 'Added coffee to the database!';
+ //   return respondJSON(request, response, responseCode, responseJSON);
 
 // not found response
 const notFound = (request, response) => {
