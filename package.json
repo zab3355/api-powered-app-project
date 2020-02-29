@@ -10,7 +10,7 @@
     "debug": "node --inspect ./src/server.js"
   },
   "author": "Cody Van De Mark",
-  "license": "UNLICENSED",
+  "license": "ISC",
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^15.1.0",
@@ -19,13 +19,5 @@
   },
   "dependencies": {
     "cuba": "^0.2.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/zab3355/api-powered-app-project.git"
-  },
-  "bugs": {
-    "url": "https://github.com/zab3355/api-powered-app-project/issues"
-  },
-  "homepage": "https://github.com/zab3355/api-powered-app-project#readme"
+  }
 }

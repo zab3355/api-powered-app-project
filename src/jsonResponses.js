@@ -1,5 +1,5 @@
 const users = {};
-const coffeeData = require('./coffeeList');
+const coffeeData = require('./coffeeList.json');
 
 // respondJSON response
 const respondJSON = (request, response, status, object) => {
@@ -93,7 +93,7 @@ const notFoundMeta = (request, response) => {
   respondJSONMeta(request, response, 404);
 };
 
-//get information from teaList
+//get information from coffeeList
 const getCoffeeList = (request, response) => {
   const responseJSON = {
     coffeeData,
@@ -105,6 +105,15 @@ const getCoffeeList = (request, response) => {
 const getCoffeeListMeta = (request, response) => {
     // 404 is returned
     respondJSONMeta(request, response, 404);
+}
+
+//add a coffee drink to the list
+const addCoffee = (request, response, body) => {
+    const responseJSON = {
+        message: 'Please fill out all fields.',
+    };
+    //check for missing fields
+    if(!body.name || !body.shop)
 }
 
 //module exports
