@@ -113,7 +113,9 @@ const addCoffee = (request, response, body) => {
         message: 'Please fill out all fields.',
     };
     //check for missing fields
-    if(!body.name || !body.shop)
+    if(!body.name || !body.shop){
+        
+    }
 }
 
 //module exports
