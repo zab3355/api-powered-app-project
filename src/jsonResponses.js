@@ -108,7 +108,11 @@ const addCoffee = (request, response, body) => {
   let responseCode = 201;
     
   let coffeeList = 0;
-  for(let x = 0; x < coffee)
+  for(let x = 0; x < coffee.length; x++){
+      responseCode = 204;
+      coffeeList = x;
+      break;
+  }
 
   if (responseCode === 204) {
     coffee[coffeeList].name = body.name;
