@@ -6,19 +6,20 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
-//UI Not fully functional yet, working on backend.
 
 const coffeeDisplay = (coffeeString, content) => {
     content.innerHTML = "";
     
     coffeeString.forEach(drink => {
-         const drinkName = document.createElement('h2');
-         const drinkDate = document.createElement('h4');
-         const drinkCafe = document.createElement('h4');
-         const drinkDesc = document.createElement('h5');
-         const drinkCost = document.createElement('h4');
-         const drinkRating = document.createElement('h4');
+         const coffeeName = document.createElement('h2');
+         const coffeeShop = document.createElement('h4');
+         const coffeeType = document.createElement('h4');
+         const coffeeDescription = document.createElement('h5');
+         const coffeePrice = document.createElement('h4');
+         const coffeeRating = document.createElement('h4');
 }
+    const coffeeDiv = document.createElement('div');
+    
 
     //JSON Parse
     const parseJSON = (xhr, content) => {
@@ -81,11 +82,11 @@ const coffeeDisplay = (coffeeString, content) => {
     };
     //update request via sendXHR
     const sendXHR = (e, nameForm) => {
-        const nameAction = nameForm.getAttribute('action');
-        const nameMethod = nameForm.getAttribute('method');
+        const coffeeAction = nameForm.getAttribute('action');
+        const coffeeMethod = nameForm.getAttribute('method');
       
         const nameField = nameForm.querySelector('#nameField');
-        const ageField = nameForm.querySelector('#ageField');
+        const descriptionField = nameForm.querySelector('#descriptionField');
       
         const xhr = new XMLHttpRequest();
         xhr.open(nameMethod, nameAction);
@@ -127,11 +128,13 @@ const coffeeDisplay = (coffeeString, content) => {
     const init = () => {
     
     //connect HTML form to functionality
-    const userForm = document.querySelector('#userForm');
-    const nameForm = document.querySelector('#nameForm');
+    //const userForm = document.querySelector('#userForm');
+    //const nameForm = document.querySelector('#nameForm');
         
-    const getUsers = (e) => requestUpdate(e, userForm);
-    const addUser = (e) => sendXHR(e, nameForm);
+        
+    const getCoffee = (e) => requestUpdate(e, coffeeForm);
+    const addCoffee = (e) => sendXHR(e, '/getCoffee');
+    const coffeeData (e) => sendXHR(e, '/coffeeData');
         
     nameForm.addEventListener('submit', addUser);
     userForm.addEventListener('submit', getUsers);
@@ -140,39 +143,54 @@ const coffeeDisplay = (coffeeString, content) => {
     
     window.onload = init;
 
-    
-    //fields: name, coffee shop, coffee, price, description, rating
     </script>
 </head>
 <body>
-  <section id="top">
-    <h1>Coffee Curfew</h1>
-    <form id="nameForm" action="/addUser" method="post">
+<nav>
+  <div id="top">
+        <h1>Coffee Curfew</h1>
+        <img src="api-powered-app-project/images/coffeeLogo.png" alt="Coffee Curfew logo">
+    </div>
+    
+    <div id="nav">
+        <button class="page" id="addCoffee">Add Coffee</button>
+        <button class="page" id="viewCoffee">View Responses</button>
+    </div>
+</nav>
+    
+    <content>
+
+    <form id="nameForm" action="/addCoffee" method="post">
+    <div class="coffeeForm">
       <label for="name">Name: </label>
       <input id="nameField" type="text" name="name" />
       <label for="shop">Favorite Coffee Shop: </label>
-      <input id="shopField" type="number" name="shop" min="0" max="100" step="1"/>
-      <label for="coffee">Favorite Coffee: </label>
-      <input id="coffeeField" type="text" name="coffee" />
+      <input id="shopField" type="number" name="shop" min="0" max="100" step="1" />
+      <label for="coffeetype">Favorite Coffee: </label>
+      <input id="coffeetypeField" type="text" name="coffeetype" />
+      <label for="description">Coffee Description: </label>
+      <input id="descriptionField" type="text" name="description" min="0" max="100" step="1" />
       <label for="price">Price: </label>
       <input id="coffeeField" type="number" name="price" />
+      <label for="price">Rating: </label>
+      <input id="coffeeField" type="number" name="rating" /> 
         
         
-      <input type="submit" value="Add User" />
+      <input type="submit" value="Add to List" />
+    </div>
     </form>
-    <form id="userForm" action="/getUsers" method="get">
+    <form id="coffeeForm" action="/getCoffee" method="get">
       <select id='urlField'>
-        <option value='/getUsers'>/getUsers</option>
-        <option value='/notReal'>/notReal</option>
+        <option value='/getCoffee'>/getCoffee</option>
       </select>
       <select id="methodSelect">
         <option value="get">GET</option>
         <option value="head">HEAD</option>
       </select>
-      <input type="submit" value="Get User" />
+      <input type="submit" value="Get Coffee" />
+
     </form>
-  </section>
-  <section id="content">
-  </section>
+
+    </content>
 </body>
 </html>

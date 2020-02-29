@@ -6,7 +6,7 @@ const jsonHandler = require('./jsonResponses.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
-//url Struct with GET and HEAD Request + respective handlers
+// url Struct with GET and HEAD Request + respective handlers
 const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
@@ -21,7 +21,7 @@ const urlStruct = {
   },
 };
 
-//getHandle function connects handlers 
+// getHandle function connects handlers
 const getHandle = (request, response, parsedUrl) => {
   if (urlStruct[request.method][parsedUrl.pathname]) {
     urlStruct[request.method][parsedUrl.pathname](request, response);
@@ -30,7 +30,7 @@ const getHandle = (request, response, parsedUrl) => {
   }
 };
 
-//postHandle sends
+// postHandle sends
 const postHandle = (request, response, parsedUrl) => {
   if (parsedUrl.pathname === '/addCoffee') {
     const res = response;
@@ -54,16 +54,16 @@ const postHandle = (request, response, parsedUrl) => {
 
       jsonHandler.addUser(request, res, bodyParams);
     });
-    }
+  }
 };
 
-//onRequest function
+// onRequest function
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
   if (request.method === 'POST') {
-      postHandle(request, response, parsedUrl);
+    postHandle(request, response, parsedUrl);
   } else {
-      getHandle(request, response, parsedUrl);
+    getHandle(request, response, parsedUrl);
   }
 };
 

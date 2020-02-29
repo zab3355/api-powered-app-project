@@ -5,7 +5,7 @@ Project: #1 API Powered App
 File: jsonResponses.js
 */
 
-//const users = {};
+// const users = {};
 const coffee = [];
 const coffeeData = require('./coffeeList.json');
 
@@ -73,7 +73,7 @@ const addUser = (request, response, body) => {
 };
 */
 
-//get information from coffeeList
+// get information from coffeeList
 const getCoffee = (request, response) => {
   const responseJSON = {
     coffee,
@@ -82,67 +82,69 @@ const getCoffee = (request, response) => {
   respondJSON(request, response, 200, responseJSON);
 };
 
-const getCoffeeMeta = (request, response) => { 
-    respondJSONMeta(request, response, 200);
-}
-                                            
-const getCoffeeData = (request, response) => {
-    const responseJSON = {
-        coffeeData,
-    };
-    respondJSON(request, response, 200, responseJSON);
-}
+const getCoffeeMeta = (request, response) => {
+  respondJSONMeta(request, response, 200);
+};
 
-//add a coffee drink to the list
+const getCoffeeData = (request, response) => {
+  const responseJSON = {
+    coffeeData,
+  };
+  respondJSON(request, response, 200, responseJSON);
+};
+
+// add a coffee drink to the list
 const addCoffee = (request, response, body) => {
-    const responseJSON = {
-        message: 'Please fill out all fields.',
-    };
-    
-  //check for missing fields
-  if (!body.name || !body.shop || !body.description || !body.price || !body.rating) {
+  const responseJSON = {
+    message: 'Please fill out all fields.',
+  };
+
+  // check for missing fields
+  if (!body.name || !body.shop || !body.description || !body.coffeetype || !body.price || !body.rating) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
 
   let responseCode = 201;
-    
+
   let coffeeList = 0;
-  for(let x = 0; x < coffee.length; x++){
-      if(coffee[x] === body.name && coffee[x].shop === body.shop) {
+  for (let x = 0; x < coffee.length; x++) {
+    if (coffee[x] === body.name && coffee[x].coffeetype === body.coffeetype) {
       responseCode = 204;
       coffeeList = x;
       break;
-      }
+    }
   }
 
   if (responseCode === 204) {
     coffee[coffeeList].name = body.name;
     coffee[coffeeList].shop = body.shop;
     coffee[coffeeList].description = body.description;
+    coffee[coffeeList].coffeetype = body.coffeetype;
     coffee[coffeeList].price = body.price;
     coffee[coffeeList].rating = body.rating;
-  
-  // return the appropriate response code
-  return respondJSONMeta(request, response, responseCode);
+
+    // return the appropriate response code
+    return respondJSONMeta(request, response, responseCode);
   }
 
-coffee.push({
+  coffee.push({
     name: body.name,
     shop: body.shop,
     description: body.description,
+    coffeetype: body.coffeetype,
     price: body.price,
     rating: body.rating,
-});
+  });
 
-responseJSON.message = 'Added coffee to the database!';
-    return respondJSON(request, response, responseCode, responseJSON);
+  responseJSON.message = 'Added coffee to the database!';
+  return respondJSON(request, response, responseCode, responseJSON);
 };
 
 
- // if (responseCode === 201) {
-   // responseJSON.message = 'Added coffee to the database!';
- //   return respondJSON(request, response, responseCode, responseJSON);
+// if (responseCode === 201) {
+// responseJSON.message = 'Added coffee to the database!';
+//   return respondJSON(request, response, responseCode, responseJSON);
 
 // not found response
 const notFound = (request, response) => {
@@ -161,7 +163,7 @@ const notFoundMeta = (request, response) => {
 };
 
 
-//module exports
+// module exports
 module.exports = {
   getCoffee,
   getCoffeeMeta,
