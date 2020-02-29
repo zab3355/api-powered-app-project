@@ -36,6 +36,16 @@ p {
   margin: 0 auto;
 }
 
+img {
+    display: block;
+    max-width: 40%;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px 0px 5px 0px;
+
+    min-width: 400px;
+}
+
 #top h1 {
   font-size: 2em;
 }

@@ -11,13 +11,12 @@ const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
     '/style.css': htmlHandler.getCSS,
-    '/getUsers': jsonHandler.getUsers,
-    '/notReal': jsonHandler.notReal,
+    '/getCoffee': jsonHandler.getCoffee,
+    '/coffeeData': jsonHandler.getCoffeeData,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
-    '/getUsers': jsonHandler.getUsersMeta,
-    '/notReal': jsonHandler.notRealMeta,
+    '/getCoffee': jsonHandler.getCoffeeMeta,
     notFound: jsonHandler.notFoundMeta,
   },
 };
@@ -33,7 +32,7 @@ const getHandle = (request, response, parsedUrl) => {
 
 //postHandle sends
 const postHandle = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/addUser') {
+  if (parsedUrl.pathname === '/addCoffee') {
     const res = response;
     const body = [];
 
@@ -55,8 +54,6 @@ const postHandle = (request, response, parsedUrl) => {
 
       jsonHandler.addUser(request, res, bodyParams);
     });
-    } else {
-        jsonHandler.notReal(request, response);
     }
 };
 

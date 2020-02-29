@@ -1,4 +1,12 @@
-const users = {};
+/*
+Author: Zach Brown
+Course: IGME-430
+Project: #1 API Powered App
+File: jsonResponses.js
+*/
+
+//const users = {};
+const coffee = [];
 const coffeeData = require('./coffeeList.json');
 
 // respondJSON response
@@ -22,7 +30,7 @@ const respondJSONMeta = (request, response, status) => {
 };
 
 // get users response
-const getUsers = (request, response) => {
+/* const getUsers = (request, response) => {
   const responseJSON = {
     users,
   };
@@ -63,19 +71,73 @@ const addUser = (request, response, body) => {
   // return the appropriate response code
   return respondJSONMeta(request, response, responseCode);
 };
+*/
 
-// not real response
-const notReal = (request, response) => {
+//get information from coffeeList
+const getCoffee = (request, response) => {
   const responseJSON = {
-    message: 'The page you are looking for was not found',
-    id: 'notFound',
+    coffee,
   };
-  // 404 is returned
-  respondJSON(request, response, 404, responseJSON);
+    // 200 status code success
+  respondJSON(request, response, 200, responseJSON);
 };
 
-// not real meta response
-const notRealMeta = (request, response) => respondJSONMeta(request, response, 404);
+const getCoffeeMeta = (request, response) => { 
+    respondJSONMeta(request, response, 200);
+}
+                                            
+const getCoffeeData = (request, response) => {
+    const responseJSON = {
+        coffeeData,
+    };
+    respondJSON(request, response, 200, responseJSON);
+}
+
+//add a coffee drink to the list
+const addCoffee = (request, response, body) => {
+    const responseJSON = {
+        message: 'Please fill out all fields.',
+    };
+    //check for missing fields
+
+  if (!body.name || !body.shop || !body.description || !body.price || !body.rating) {
+    responseJSON.id = 'missingParams';
+    return respondJSON(request, response, 400, responseJSON);
+  }
+
+  let responseCode = 201;
+    
+  let coffeeList = 0;
+  for(let x = 0; x < coffee)
+
+  if (responseCode === 204) {
+    coffee[coffeeList].name = body.name;
+    coffee[coffeeList].shop = body.shop;
+    coffee[coffeeList].description = body.description;
+    coffee[coffeeList].price = body.price;
+    coffee[coffeeList].rating = body.rating;
+  }  
+  // return the appropriate response code
+  return respondJSONMeta(request, response, responseCode);
+  }
+
+coffee.push({
+    name: body.name,
+    shop: body.shop,
+    description: body.description,
+    price: body.price,
+    rating: body.rating,
+});
+
+responseJSON.message = 'Added coffee to the database!';
+    return respondJSON(request, response, responseCode, responseJSON);
+
+
+  if (responseCode === 201) {
+    responseJSON.message = 'Added coffee to the database!';
+    return respondJSON(request, response, responseCode, responseJSON);
+  }
+};
 
 // not found response
 const notFound = (request, response) => {
@@ -93,40 +155,15 @@ const notFoundMeta = (request, response) => {
   respondJSONMeta(request, response, 404);
 };
 
-//get information from coffeeList
-const getCoffeeList = (request, response) => {
-  const responseJSON = {
-    coffeeData,
-  };
-    // 200 status code success
-  respondJSON(request, response, 200, responseJSON);
-};
 
-const getCoffeeListMeta = (request, response) => {
-    // 404 is returned
-    respondJSONMeta(request, response, 404);
-}
-
-//add a coffee drink to the list
-const addCoffee = (request, response, body) => {
-    const responseJSON = {
-        message: 'Please fill out all fields.',
-    };
-    //check for missing fields
-    if(!body.name || !body.shop){
-        
-    }
-}
 
 //module exports
 module.exports = {
-  getUsers,
-  getUsersMeta,
-  addUser,
-  notReal,
-  notRealMeta,
+  getCoffee,
+  getCoffeeMeta,
+  getCoffeeData,
+  addCoffee,
   notFound,
   notFoundMeta,
-  getCoffeeList,
-  getCoffeeListMeta,
+
 };
