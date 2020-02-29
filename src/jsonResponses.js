@@ -122,10 +122,10 @@ const addCoffee = (request, response, body) => {
     coffee[coffeeList].description = body.description;
     coffee[coffeeList].price = body.price;
     coffee[coffeeList].rating = body.rating;
-  }  
+  
   // return the appropriate response code
   return respondJSONMeta(request, response, responseCode);
-}
+  }
 
 coffee.push({
     name: body.name,
