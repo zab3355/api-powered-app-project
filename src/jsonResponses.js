@@ -133,8 +133,8 @@ coffee.push({
     rating: body.rating,
 });
 
-responseJSON.message = 'Added coffee to the database!';
-    return respondJSON(request, response, responseCode, responseJSON);
+//responseJSON.message = 'Added coffee to the database!';
+  //  return respondJSON(request, response, responseCode, responseJSON);
 
 
   if (responseCode === 201) {
