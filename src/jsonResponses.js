@@ -100,7 +100,12 @@ const addCoffee = (request, response, body) => {
   };
 
   // check for missing fields
-  if (!body.name || !body.shop || !body.description || !body.coffeetype || !body.price || !body.rating) {
+  if (!body.name || !body.shop || !body.description) {
+    responseJSON.id = 'missingParams';
+    return respondJSON(request, response, 400, responseJSON);
+  }
+  
+  else if (!body.coffeetype || !body.price || !body.rating){
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
