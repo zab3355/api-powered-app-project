@@ -6,6 +6,31 @@ html, body {
   background-image: url('images/background.png');
 }
 
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #597322;
+    font-size: 5em;
+    margin: 0px 10px 10px 10px;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    color: #597322;
+    font-size: 2em;
+    text-align: center;
+}
+
+h3 {
+    font-family: 'Playfair Display', serif;
+    color: #597322;
+    font-size: 1.5em;
+}
+
+p {
+    color: #798C65;
+    font-family: 'DM Serif Text', serif;
+    text-align: center;
+}
 #top {
   text-align: center;
   margin: 0 auto;
