@@ -140,8 +140,7 @@ responseJSON.message = 'Added coffee to the database!';
   if (responseCode === 201) {
     responseJSON.message = 'Added coffee to the database!';
     return respondJSON(request, response, responseCode, responseJSON);
-  }
-};
+  };
 
 // not found response
 const notFound = (request, response) => {
