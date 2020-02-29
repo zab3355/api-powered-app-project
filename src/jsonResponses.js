@@ -98,8 +98,8 @@ const addCoffee = (request, response, body) => {
     const responseJSON = {
         message: 'Please fill out all fields.',
     };
-    //check for missing fields
-
+    
+  //check for missing fields
   if (!body.name || !body.shop || !body.description || !body.price || !body.rating) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
@@ -109,9 +109,11 @@ const addCoffee = (request, response, body) => {
     
   let coffeeList = 0;
   for(let x = 0; x < coffee.length; x++){
+      if(coffee[x] === body.name && coffee[x].shop === body.shop) {
       responseCode = 204;
       coffeeList = x;
       break;
+      }
   }
 
   if (responseCode === 204) {
@@ -123,6 +125,7 @@ const addCoffee = (request, response, body) => {
   }  
   // return the appropriate response code
   return respondJSONMeta(request, response, responseCode);
+}
 
 coffee.push({
     name: body.name,
@@ -156,7 +159,6 @@ const notFoundMeta = (request, response) => {
   // 404 is returned
   respondJSONMeta(request, response, 404);
 };
-
 
 
 //module exports
