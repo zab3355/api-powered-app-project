@@ -1,39 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Acme&display=swap');
+
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  background-image: url("api-powered-app-project/images/background.png");
+  background: url("/images/background.png");
 }
 
 h1 {
-    font-family: 'Playfair Display', serif;
-    color: #597322;
+    font-family: 'Acme', serif;
+    color: #271e16;
     font-size: 5em;
     margin: 0px 10px 10px 10px;
 }
 
 h2 {
-    font-family: 'Playfair Display', serif;
-    color: #597322;
+    font-family: 'Acme', serif;
+    color: #271e16;
     font-size: 2em;
     text-align: center;
 }
 
 h3 {
     font-family: 'Playfair Display', serif;
-    color: #597322;
+    color: #271e16;
     font-size: 1.5em;
 }
 
 p {
-    color: #798C65;
+    color: #5b4734;
     font-family: 'DM Serif Text', serif;
     text-align: center;
 }
 #top {
   text-align: center;
   margin: 0 auto;
+}
+
+#nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-self: center;
+  margin: 0 auto;
+  /* border: 1px solid red; */
+  width: 75%;
 }
 
 img {
