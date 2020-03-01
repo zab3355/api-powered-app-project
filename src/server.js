@@ -1,3 +1,10 @@
+/*
+Author: Zach Brown
+Course: IGME-430
+Project: #1 API Powered App
+File: server.js
+*/
+
 const http = require('http');
 const url = require('url');
 const query = require('querystring');
@@ -13,6 +20,7 @@ const urlStruct = {
     '/style.css': htmlHandler.getCSS,
     '/getCoffee': jsonHandler.getCoffee,
     '/coffeeData': jsonHandler.getCoffeeData,
+    '/getImages': htmlHandler.getImages,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
@@ -52,7 +60,7 @@ const postHandle = (request, response, parsedUrl) => {
       const bodyString = Buffer.concat(body).toString();
       const bodyParams = query.parse(bodyString);
 
-      jsonHandler.addUser(request, res, bodyParams);
+      jsonHandler.addCoffee(request, res, bodyParams);
     });
   }
 };

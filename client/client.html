@@ -19,8 +19,11 @@ const coffeeDisplay = (coffeeString, content) => {
          const coffeeRating = document.createElement('h4');
 }
     const coffeeDiv = document.createElement('div');
+    coffeeBorder.style.backgroundColor = '#ffffff';
+    coffeeBorder.style.width = "40vw";
+    coffeeBorder.style.margin = "5vh 20vw";
+    coffeeBorder.style.padding = "1em";
     
-
     //JSON Parse
     const parseJSON = (xhr, content) => {
       if(xhr.response) {
@@ -35,11 +38,11 @@ const coffeeDisplay = (coffeeString, content) => {
         }
 
         //if users response
-        if(parsedObj.users) {
-          const userList = document.createElement('p');
-          const users = JSON.stringify(parsedObj.users);
-          userList.textContent = users;
-          content.appendChild(userList);
+        if(parsedObj.coffee) {
+          const coffeeList = document.createElement('p');
+          const coffee = JSON.stringify(parsedObj.coffee);
+          coffeeData.textContent = users;
+          content.appendChild(coffeeData);
         } else if(parsedObj.coffee) {
             const coffeeList = document.createElement('p');
             const coffee = JSON.stringify(parsedObj.coffee);
@@ -101,16 +104,26 @@ const coffeeDisplay = (coffeeString, content) => {
       
         xhr.onload = () => handleResponse(xhr);
       
-        const formData = `name=${nameField.value}&age=${ageField.value}`;
+        //inserts values for all fields user fills in
+        const formData = `name=${drinkField.value}&shop=${dateField.value}&coffeetype=${cafeField.value}&description=${descField.value}&price=${costField.value}&rating=${ratingField.value}`;
       
         xhr.send(formData);
     
         e.preventDefault();
+        
+        alert('Coffee added to list');
+        
         return false;
     };
- 
+        const showForm = () => {
+            const addCoffeeForm = document.querySelector('#addCoffeeForm');
+            
+            if(addCoffeeForm.style.display === "none"){
+                addCoffeeForm.style.display = "block";
+            }
+        }
     
-        const requestUpdate = (e, method) => {
+    const requestUpdate = (e, method) => {
         const addCoffeeForm = document.querySelector('#addCoffeeForm');
       
         addCoffeeForm.style.display = "none";
@@ -126,30 +139,30 @@ const coffeeDisplay = (coffeeString, content) => {
             }
         xhr.send();
       
-    e.preventDefault();
-    return false;
+        e.preventDefault();
+        return false;
     };
 
     //init implementation
     const init = () => {
     
-    //connect HTML form to functionality
-    //const userForm = document.querySelector('#userForm');
-    //const nameForm = document.querySelector('#nameForm');
+        const coffeeForm = document.querySelector('#addCoffeeForm');
+        //connect HTML form to functionality
         
-    const addCoffeeButton = document.querySelector("#addCoffee");
-    const viewResponsesButton = document.querySelector("#viewCoffee");
+        const addCoffeeButton = document.querySelector("#addCoffee");
+        const viewResponsesButton = document.querySelector("#viewCoffee");
         
-    
-    
+        const showFormButton = document.querySelector('')
+            
+        const showFormButton.addEventListener('click', showForm);
         
-    const getCoffee = (e) => requestUpdate(e, coffeeForm);
-    const addCoffee = (e) => sendXHR(e, '/getCoffee');
-    const coffeeData (e) => sendXHR(e, '/coffeeData');
+        const addCoffee = (e) => requestUpdate(e, coffeeForm);
+        const getCoffee = (e) => sendXHR(e, '/getCoffee');
+        const coffeeData (e) => sendXHR(e, '/coffeeData');
         
-    coffeeForm.addEventListener('submit', addUser);
-    userForm.addEventListener('submit', getUsers);
-    };
+        addCoffeeButton.addEventListener('submit', getCoffee);
+        viewResponsesButton.addEventListener('submit', coffeeData);
+        };
         
     
     window.onload = init;
@@ -160,12 +173,12 @@ const coffeeDisplay = (coffeeString, content) => {
 <nav>
   <div id="top">
         <h1>Coffee Curfew</h1>
-        <img src="/images/coffeeLogo.png" alt="Coffee Curfew logo">
+        <img src='/getImages' alt="Coffee Curfew logo">
     </div>
     
     <div id="nav">
-        <button class="page" id="addCoffee">Add Coffee</button>
-        <button class="page" id="viewCoffee">View Responses</button>
+        <button class="addCoffeeButton" id="addCoffee">Add Coffee</button>
+        <button class="viewCoffeeButton" id="viewCoffee">View Responses</button>
     </div>
 </nav>
     
@@ -187,7 +200,7 @@ const coffeeDisplay = (coffeeString, content) => {
       <input id="coffeeField" type="number" name="rating" /> 
         
         
-      <input type="submit" value="Add to List" />
+      <input id="coffeeSubmit" type="submit" value="Add to List" />
     </div>
     </form>
     </content>

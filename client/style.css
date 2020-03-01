@@ -5,7 +5,7 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background: url("/images/background.png");
+  background: url('/getImages');
 }
 
 h1 {
@@ -34,8 +34,9 @@ p {
     text-align: center;
 }
 #top {
-  text-align: center;
-  margin: 0 auto;
+    width: 20%;
+    font-size: 20px;
+    padding: 5px 5px;
 }
 
 #nav {
@@ -46,6 +47,15 @@ p {
   margin: 0 auto;
   /* border: 1px solid red; */
   width: 75%;
+}
+
+#addCoffeeButton {
+    margin: auto 0;
+}
+
+#viewCoffeeButton {
+    margin: auto 0;
+    height: 25px;
 }
 
 img {
