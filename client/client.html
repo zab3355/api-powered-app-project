@@ -75,18 +75,23 @@ const coffeeDisplay = (coffeeString, content) => {
           alert("Internal Server Error");
           break;
         default: 
-          alert("Error: Code not implemented by client");  
+          alert("Error: Code not implemented by client");
           break;
       }
       parseJSON(xhr, content);
     };
+    
     //update request via sendXHR
-    const sendXHR = (e, nameForm) => {
-        const coffeeAction = nameForm.getAttribute('action');
-        const coffeeMethod = nameForm.getAttribute('method');
+    const sendXHR = (e, coffeeForm) => {
+        const coffeeAction = coffeeForm.getAttribute('action');
+        const coffeeMethod = coffeeForm.getAttribute('method');
       
-        const nameField = nameForm.querySelector('#nameField');
-        const descriptionField = nameForm.querySelector('#descriptionField');
+        const nameField = coffeeForm.querySelector('#nameField');
+        const descriptionField = coffeeForm.querySelector('#shopField');
+        const descriptionField = coffeeForm.querySelector('#coffeetypeField');
+        const descriptionField = coffeeForm.querySelector('#descriptionField');
+        const priceField = coffeeForm.querySelector('#priceField');
+        const ratingField = coffeeForm.querySelector('#ratingField');
       
         const xhr = new XMLHttpRequest();
         xhr.open(nameMethod, nameAction);
@@ -105,10 +110,11 @@ const coffeeDisplay = (coffeeString, content) => {
     };
  
     
-        const requestUpdate = (e, userForm) => {
-        const url = userForm.querySelector('#urlField').value;
-        const method = userForm.querySelector('#methodSelect').value;
+        const requestUpdate = (e, method) => {
+        const addCoffeeForm = document.querySelector('#addCoffeeForm');
       
+        addCoffeeForm.style.display = "none";
+            
         const xhr = new XMLHttpRequest();
         xhr.open(method, url);
       
@@ -124,19 +130,24 @@ const coffeeDisplay = (coffeeString, content) => {
     return false;
     };
 
-    //init 
+    //init implementation
     const init = () => {
     
     //connect HTML form to functionality
     //const userForm = document.querySelector('#userForm');
     //const nameForm = document.querySelector('#nameForm');
         
+    const addCoffeeButton = document.querySelector("#addCoffee");
+    const viewResponsesButton = document.querySelector("#viewCoffee");
+        
+    
+    
         
     const getCoffee = (e) => requestUpdate(e, coffeeForm);
     const addCoffee = (e) => sendXHR(e, '/getCoffee');
     const coffeeData (e) => sendXHR(e, '/coffeeData');
         
-    nameForm.addEventListener('submit', addUser);
+    coffeeForm.addEventListener('submit', addUser);
     userForm.addEventListener('submit', getUsers);
     };
         
@@ -160,7 +171,7 @@ const coffeeDisplay = (coffeeString, content) => {
     
     <content>
 
-    <form id="nameForm" action="/addCoffee" method="post">
+    <form id="addCoffeeForm" action="/addCoffee" method="post">
     <div class="coffeeForm">
       <label for="name">Name: </label>
       <input id="nameField" type="text" name="name" />
@@ -179,18 +190,6 @@ const coffeeDisplay = (coffeeString, content) => {
       <input type="submit" value="Add to List" />
     </div>
     </form>
-    <form id="coffeeForm" action="/getCoffee" method="get">
-      <select id='urlField'>
-        <option value='/getCoffee'>/getCoffee</option>
-      </select>
-      <select id="methodSelect">
-        <option value="get">GET</option>
-        <option value="head">HEAD</option>
-      </select>
-      <input type="submit" value="Get Coffee" />
-
-    </form>
-
     </content>
 </body>
 </html>
