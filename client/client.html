@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
   <title>Coffee Curfew - API Powered App</title>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -10,20 +15,20 @@
 const coffeeDisplay = (coffeeString, content) => {
     content.innerHTML = "";
     
-    coffeeString.forEach(drink => {
+    coffeeString.forEach(coffeeObj => {
          const coffeeName = document.createElement('h2');
          const coffeeShop = document.createElement('h4');
          const coffeeType = document.createElement('h4');
          const coffeeDescription = document.createElement('h5');
          const coffeePrice = document.createElement('h4');
          const coffeeRating = document.createElement('h4');
-}
-    const coffeeDiv = document.createElement('div');
+    
+    const coffeeBorder = document.createElement('div');
     coffeeBorder.style.backgroundColor = '#ffffff';
     coffeeBorder.style.width = "40vw";
     coffeeBorder.style.margin = "5vh 20vw";
     coffeeBorder.style.padding = "1em";
-    
+    });
     //JSON Parse
     const parseJSON = (xhr, content) => {
       if(xhr.response) {
@@ -51,7 +56,11 @@ const coffeeDisplay = (coffeeString, content) => {
         } else {
           console.dir('Response sent');
         }
+          if(parsedObj.coffeeData){
+              coffeeString(parsedObj.coffeeData.coffee, content);
+          }
       }
+    }
     };
 
     //Possible status codes
@@ -90,8 +99,8 @@ const coffeeDisplay = (coffeeString, content) => {
         const coffeeMethod = coffeeForm.getAttribute('method');
       
         const nameField = coffeeForm.querySelector('#nameField');
-        const descriptionField = coffeeForm.querySelector('#shopField');
-        const descriptionField = coffeeForm.querySelector('#coffeetypeField');
+        const shopField = coffeeForm.querySelector('#shopField');
+        const coffeetypeField = coffeeForm.querySelector('#coffeetypeField');
         const descriptionField = coffeeForm.querySelector('#descriptionField');
         const priceField = coffeeForm.querySelector('#priceField');
         const ratingField = coffeeForm.querySelector('#ratingField');
@@ -115,12 +124,13 @@ const coffeeDisplay = (coffeeString, content) => {
         
         return false;
     };
-        const showForm = () => {
-            const addCoffeeForm = document.querySelector('#addCoffeeForm');
+    const showForm = () => {
+        const addCoffeeForm = document.querySelector('#addCoffeeForm');
+        const showContent = document.querySelector('#output');
             
-            if(addCoffeeForm.style.display === "none"){
-                addCoffeeForm.style.display = "block";
-            }
+        if(addCoffeeForm.style.display === "none") {
+            addCoffeeForm.style.display = "block";
+        }
         }
     
     const requestUpdate = (e, method) => {
@@ -152,18 +162,16 @@ const coffeeDisplay = (coffeeString, content) => {
         const addCoffeeButton = document.querySelector("#addCoffee");
         const viewResponsesButton = document.querySelector("#viewCoffee");
         
-        const showFormButton = document.querySelector('')
-            
-        const showFormButton.addEventListener('click', showForm);
+        const showFormButton = document.querySelector('#addCoffee');
+        showFormButton.addEventListener('click', showForm);
         
         const addCoffee = (e) => requestUpdate(e, coffeeForm);
         const getCoffee = (e) => sendXHR(e, '/getCoffee');
-        const coffeeData (e) => sendXHR(e, '/coffeeData');
+        const coffeeData = (e) => sendXHR(e, '/coffeeData');
         
         addCoffeeButton.addEventListener('submit', getCoffee);
         viewResponsesButton.addEventListener('submit', coffeeData);
         };
-        
     
     window.onload = init;
 
@@ -172,14 +180,19 @@ const coffeeDisplay = (coffeeString, content) => {
 <body>
 <nav>
   <div id="top">
-        <h1>Coffee Curfew</h1>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+        <div class="navbar-header">
+        <h1 class="navbar-brand">Coffee Curfew</h1>
+
         <img src='/getImages' alt="Coffee Curfew logo">
     </div>
     
-    <div id="nav">
+  <ul class="nav navbar-nav">
         <button class="addCoffeeButton" id="addCoffee">Add Coffee</button>
         <button class="viewCoffeeButton" id="viewCoffee">View Responses</button>
-    </div>
+    </ul>
+ </div>
 </nav>
     
     <content>
@@ -204,5 +217,9 @@ const coffeeDisplay = (coffeeString, content) => {
     </div>
     </form>
     </content>
+    
+    <section id="coffeeResponses">
+        <div id="output"></div>
+    </section>
 </body>
 </html>

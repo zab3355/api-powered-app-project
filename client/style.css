@@ -5,7 +5,7 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background: url('/getImages');
+  background-image: url('/getImagesBG');
 }
 
 h1 {
@@ -23,7 +23,7 @@ h2 {
 }
 
 h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Acme', serif;
     color: #271e16;
     font-size: 1.5em;
 }

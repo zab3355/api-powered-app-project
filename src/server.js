@@ -21,10 +21,11 @@ const urlStruct = {
     '/getCoffee': jsonHandler.getCoffee,
     '/coffeeData': jsonHandler.getCoffeeData,
     '/getImages': htmlHandler.getImages,
+    '/getImagesBG': htmlHandler.getImagesBG,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
-    '/getCoffee': jsonHandler.getCoffeeMeta,
+    '/getCoffee': jsonHandler.getCoffeeMeta, 
     notFound: jsonHandler.notFoundMeta,
   },
 };

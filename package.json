@@ -7,7 +7,7 @@
     "start": "node ./src/server.js",
     "pretest": "eslint ./src --fix",
     "test": "echo \"Tests complete\"",
-    "debug": "node --inspect ./src/server.js",    
+    "debug": "node --inspect ./src/server.js",
     "nodemon": "nodemon --watch ./src ./src/server.js"
   },
   "author": "Zach Brown",
@@ -19,6 +19,7 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "bootstrap": "^4.4.1",
     "cuba": "^0.2.0"
   },
   "repository": {
