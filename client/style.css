@@ -56,12 +56,80 @@ p {
 }
 
 #addCoffeeButton {
-    margin: auto 0;
+    margin-top: 40px;
+    margin-right: 15px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: white;
+    font-family: "Acme";
+    font-size: 25px;
 }
 
-#viewCoffeeButton {
-    margin: auto 0;
+#coffeeData {
+    margin-top: 40px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: white;
+    font-family: "Acme";
+    font-size: 25px;
+}
+
+#addCoffeeButton:hover {
+    margin-top: 45px;
+    margin-right: 15px;
     height: 25px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #5b4734;
+    font-family: "Acme";
+    font-size: 25px;
+}
+
+#coffeeData:hover {
+    margin-top: 45px;
+    height: 25px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #5b4734;
+    font-family: "Acme";
+    font-size: 25px;
+}
+
+#addCoffeeForm {
+    font-family: sans-serif;
+    font-size: 15px;
+    text-align: center;
+}
+
+.coffeeForm {
+    background-color: white;
+    opacity: .9;
+}
+
+#coffeeSubmit {
+    border: 2px solid #5b4734;
+    background: white;
+    color: #5b4734;
+    font-family: "Acme";
+    margin-top: 5%;
+    font-size: 25px;
+    padding: .5em;
+    border-radius: 50px;
+}
+
+#coffeeSubmit:hover {
+    border: 2px solid darkgoldenrod;
+    background: black;
+    color: darkgoldenrod;
+    font-family: "Acme";
+    margin-top: 5%;
+    font-size: 25px;
+    padding: .5em;
+    border-radius: 50px;
 }
 
 img {
@@ -72,6 +140,11 @@ img {
     padding: 10px 0px 5px 0px;
 
     min-width: 400px;
+}
+
+label {
+    display: block;
+    position: relative;
 }
 
 #top h1 {

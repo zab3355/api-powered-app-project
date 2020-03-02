@@ -3,6 +3,8 @@ Author: Zach Brown
 Course: IGME-430
 Project: #1 API Powered App
 File: jsonResponses.js
+
+JSON File Source: https://github.com/CoffeeJson/json
 */
 
 // const users = {};
@@ -29,56 +31,12 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
-// get users response
-/* const getUsers = (request, response) => {
-  const responseJSON = {
-    users,
-  };
-    // 200 status code success
-  respondJSON(request, response, 200, responseJSON);
-};
-
-// get users meta
-const getUsersMeta = (request, response) => respondJSONMeta(request, response, 200);
-
-// function which adds a user
-const addUser = (request, response, body) => {
-  const responseJSON = {
-    message: 'Name and age are both required.',
-  };
-
-  if (!body.name || !body.age) {
-    responseJSON.id = 'missingParams';
-    return respondJSON(request, response, 400, responseJSON);
-  }
-
-  let responseCode = 201;
-
-  if (users[body.name]) {
-    responseCode = 204;
-  } else {
-    users[body.name] = {};
-  }
-
-  // update name and age of user
-  users[body.name].name = body.name;
-  users[body.name].age = body.age;
-
-  if (responseCode === 201) {
-    responseJSON.message = 'Created Successfully';
-    return respondJSON(request, response, responseCode, responseJSON);
-  }
-  // return the appropriate response code
-  return respondJSONMeta(request, response, responseCode);
-};
-*/
-
 // get information from coffeeList
 const getCoffee = (request, response) => {
   const responseJSON = {
     coffee,
   };
-    // 200 status code success
+  // 200 status code success
   respondJSON(request, response, 200, responseJSON);
 };
 
@@ -93,6 +51,8 @@ const getCoffeeData = (request, response) => {
   respondJSON(request, response, 200, responseJSON);
 };
 
+const getCoffeeDataMeta = (request, response) => respondJSONMeta(request, response, 200);
+
 // add a coffee drink to the list
 const addCoffee = (request, response, body) => {
   const responseJSON = {
@@ -105,6 +65,7 @@ const addCoffee = (request, response, body) => {
     return respondJSON(request, response, 400, responseJSON);
   }
   
+  //continuation to check for missing fields
   else if (!body.coffeetype || !body.price || !body.rating){
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
@@ -112,20 +73,22 @@ const addCoffee = (request, response, body) => {
 
   let responseCode = 201;
 
-  let coffeeList = 0;
+  //Checks if update is required by searching if the data exists
+  let coffeeList = -1;
   for (let x = 0; x < coffee.length; x++) {
-    if (coffee[x] === body.name && coffee[x].coffeetype === body.coffeetype) {
+    if (coffee[x] === body.name && coffee[x].shop === body.shop && coffee[x].coffeetype === body.coffeetype) {
       responseCode = 204;
       coffeeList = x;
       break;
     }
-  }
+  } 
 
+  //updates JSON data if data is modified
   if (responseCode === 204) {
     coffee[coffeeList].name = body.name;
     coffee[coffeeList].shop = body.shop;
-    coffee[coffeeList].description = body.description;
     coffee[coffeeList].coffeetype = body.coffeetype;
+    coffee[coffeeList].description = body.description;
     coffee[coffeeList].price = body.price;
     coffee[coffeeList].rating = body.rating;
 
@@ -133,7 +96,7 @@ const addCoffee = (request, response, body) => {
     return respondJSONMeta(request, response, responseCode);
   }
 
-  //update data
+  //data gets pushed into new object
   coffee.push({
     name: body.name,
     shop: body.shop,
@@ -147,11 +110,6 @@ const addCoffee = (request, response, body) => {
   responseJSON.message = 'Added coffee to the database!';
   return respondJSON(request, response, responseCode, responseJSON);
 };
-
-
-// if (responseCode === 201) {
-// responseJSON.message = 'Added coffee to the database!';
-//   return respondJSON(request, response, responseCode, responseJSON);
 
 // not found response
 const notFound = (request, response) => {
@@ -175,8 +133,8 @@ module.exports = {
   getCoffee,
   getCoffeeMeta,
   getCoffeeData,
+  getCoffeeDataMeta,
   addCoffee,
   notFound,
   notFoundMeta,
-
 };

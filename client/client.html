@@ -4,6 +4,7 @@
   <title>Coffee Curfew - API Powered App</title>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='icon' href='/getFavicon' type='image/x-icon'/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -12,42 +13,45 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
 
+let coffee;
+
 const coffeeDisplay = (coffeeString, content) => {
     content.innerHTML = "";
     
     //creating elements within coffeeObj
-    coffeeString.forEach(coffeeObj => {
+    coffeeString.forEach(coffee => {
          const coffeeName = document.createElement('h2');
-         const coffeeShop = document.createElement('h2');
          const coffeeType = document.createElement('h2');
-         const coffeeDescription = document.createElement('h5');
-         const coffeePrice = document.createElement('h4');
-         const coffeeRating = document.createElement('h4');
+         const coffeeShop = document.createElement('h2');
+         const coffeeDescription = document.createElement('h4');
+         const coffeePrice = document.createElement('h3');
+         const coffeeRating = document.createElement('h3');
     
-        //div elements for formatting
+        //div elements for formatting on view responses
         const coffeeBorder = document.createElement('div');
         coffeeBorder.style.backgroundColor = '#ffffff';
-        coffeeBorder.style.width = "40vw";
-        coffeeBorder.style.margin = "5vh 20vw";
+        coffeeBorder.style.width = "auto";
+        coffeeBorder.style.margin = "100px 200px";
         coffeeBorder.style.padding = "1em";
+        coffeeBorder.style.opacity = .9;
         
         //appending data
-        coffeeName.textContent = `Your Name: ${coffee.coffeeName}`;
+        coffeeName.textContent = `Name: ${coffee.name}`;
         coffeeBorder.appendChild(coffeeName);
         
-        coffeeShop.textContent = `Favorite Coffee Shop: ${coffee.coffeeShop}`;
-        coffeeBorder.appendChild(coffeeShop);
-        
-        coffeeType.textContent = `Favorite Coffee: ${coffee.coffeeType}`;
+        coffeeType.textContent = `Favorite Coffee: ${coffee.coffeetype}`;
         coffeeBorder.appendChild(coffeeType);
         
-        coffeeDescription.textContent = `Description: ${coffee.coffeeShop}`;
+        coffeeShop.textContent = `Favorite Coffee Shop: ${coffee.shop}`;
+        coffeeBorder.appendChild(coffeeShop);
+        
+        coffeeDescription.textContent = `Description: ${coffee.description}`;
         coffeeBorder.appendChild(coffeeDescription);
         
-        coffeePrice.textContent = `Price: ${coffee.coffeePrice}`;
+        coffeePrice.textContent = `Price: ${coffee.price}`;
         coffeeBorder.appendChild(coffeePrice);
         
-        coffeeType.textContent = `Rating: ${coffee.coffeeRating}`;
+        coffeeType.textContent = `Rating: ${coffee.rating}`;
         coffeeBorder.appendChild(coffeeRating);
         
         content.appendChild(coffeeBorder);
@@ -57,28 +61,28 @@ const coffeeDisplay = (coffeeString, content) => {
     const parseJSON = (xhr, content) => {
       if(xhr.response) {
         const parsedObj = JSON.parse(xhr.response);
-        console.dir(parsedObj);
-
-        //if message response
+    
         if(parsedObj.message) {
           const p = document.createElement('p');
-          p.textContent = `Message: ${parsedObj.message}`;
+          p.textContent = `Message: ${xhr.response}`;
+            
           content.appendChild(p);
         }
 
         //coffee responses
-        if(parsedObj.coffee) {
-
+        if(parsedObj.coffees) {
+            const stringCoffees = JSON.stringify(parsedObj.coffees);
+            //if there's no drink added
             if(parsedObj.coffee.length === 0) {
                 alert('No coffee was added to the database. Try again.');
             } else {
                 coffeeDisplay(parsedObj.coffee, content);
             };
         }
-          if(parsedObj.coffeeData){
-              coffeeDisplay(parsedObj.coffeeData.coffee, content);
+          if(parsedObj.coffeeData) {
+            coffeeDisplay(parsedObj.coffeeData.coffees, content);
           };
-      };
+        };
     };
 
     //Possible status codes
@@ -87,13 +91,13 @@ const coffeeDisplay = (coffeeString, content) => {
 
       switch(xhr.status) {
         case 200: 
-          content.innerHTML = `<b>Success.</b>`;
+          content.innerHTML = `<h3>Success.</h3>`;
           break;
         case 201: 
-          content.innerHTML = '<b>Creation Success.</b>';
+          content.innerHTML = '<h3>Creation Success.</h3>';
           break;
         case 204:
-          content.innerHTML = '<b>Content Updated.</b>';
+          content.innerHTML = '<h3>Content Updated.</h3>';
           break;
         case 400: 
           alert("All fields are required.");
@@ -118,8 +122,8 @@ const coffeeDisplay = (coffeeString, content) => {
       
         //assign fields to selective form elements
         const nameField = coffeeForm.querySelector('#nameField');
-        const shopField = coffeeForm.querySelector('#shopField');
         const coffeetypeField = coffeeForm.querySelector('#coffeetypeField');
+        const shopField = coffeeForm.querySelector('#shopField');
         const descriptionField = coffeeForm.querySelector('#descriptionField');
         const priceField = coffeeForm.querySelector('#priceField');
         const ratingField = coffeeForm.querySelector('#ratingField');
@@ -133,20 +137,13 @@ const coffeeDisplay = (coffeeString, content) => {
         xhr.onload = () => handleResponse(xhr);
       
         //inserts values for all fields user fills in
-        const formData = `name=${nameField.value}&shop=${shopField.value}&coffeetype=${coffeetypeField.value}&description=${descriptionField.value}&price=${priceField.value}&rating=${ratingField.value}`;
+        const formData = `name=${nameField.value}&coffeetype=${coffeetypeField.value}&shop=${shopField.value}&description=${descriptionField.value}&price=${priceField.value}&rating=${ratingField.value}`;
       
         //created object sent
         xhr.send(formData);
-        console.dir(`form data: ${formData}`);
+        console.dir(`formData: ${formData}`);
         
         e.preventDefault();
-     
-        nameField.value = "";
-        shopField.value = "";
-        coffeetypeField.value = "";
-        descriptionField.value = "";
-        priceField.value = "";
-        ratingField.value = "";
         
         //alert sent to user that coffee was added.
         alert('Coffee added to list');
@@ -154,25 +151,29 @@ const coffeeDisplay = (coffeeString, content) => {
         return false;
     };
 
+    //displays and hides the add coffee form and view responses form
     const showForm = () => {
         const addCoffeeForm = document.querySelector('#addCoffeeForm');
-        const coffeeView = document.querySelector('#coffeeSubmit')
         const showContent = document.querySelector('#output');
             
         if(addCoffeeForm.style.display === "none") {
             addCoffeeForm.style.display = "block";
+            showContent.style.display = "none";
         }
     }
     
+    //updates page with information
     const requestUpdate = (e, method) => {
         const addCoffeeForm = document.querySelector('#addCoffeeForm');
-        const coffeeViewer = document.querySelector('#coffeeSubmit');
+        const coffeeViewer = document.querySelector('#output');
       
         addCoffeeForm.style.display = "none";
+        coffeeViewer.style.display = "block";
             
         const xhr = new XMLHttpRequest();
         xhr.open('get', method);
       
+        //Setting request header
         xhr.setRequestHeader('Accept', 'application/json');
             if(method == 'get') {
                 xhr.onload = () => handleResponse(xhr, true);
@@ -187,7 +188,6 @@ const coffeeDisplay = (coffeeString, content) => {
 
     //init implementation
     const init = () => {
-    
         //connects HTML form elements to functionality
         const coffeeForm = document.querySelector('#addCoffeeForm');
         
@@ -205,7 +205,7 @@ const coffeeDisplay = (coffeeString, content) => {
         coffeeForm.addEventListener('submit', addCoffee);
         viewCoffeeButtonLabel.addEventListener('click', coffeeDatalist);
         };
-    
+
     window.onload = init;
 
     </script>

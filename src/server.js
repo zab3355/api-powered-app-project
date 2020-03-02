@@ -23,6 +23,7 @@ const urlStruct = {
     '/getLogo': htmlHandler.getLogo,
     '/getLogoHover': htmlHandler.getLogoHover,
     '/getBG': htmlHandler.getBG,
+    '/getFavicon': htmlHandler.getFavicon,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
@@ -67,7 +68,7 @@ const postHandle = (request, response, parsedUrl) => {
   }
 };
 
-// onRequest function
+// onRequest function which parses the URL and sets/gets data
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
   if (request.method === 'POST') {
