@@ -1,3 +1,10 @@
+/*
+Author: Zach Brown
+Course: IGME-430
+Project: #1 API Powered App
+File: htmlResponses.js
+*/
+
 const fs = require('fs'); // pull in the file system module
 
 const index = fs.readFileSync(`${__dirname}/../client/client.html`);
