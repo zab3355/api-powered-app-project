@@ -3,6 +3,7 @@ const fs = require('fs'); // pull in the file system module
 const index = fs.readFileSync(`${__dirname}/../client/client.html`);
 const css = fs.readFileSync(`${__dirname}/../client/style.css`);
 const coffeeLogo = fs.readFileSync(`${__dirname}/../images/coffeeLogo.png`);
+const coffeeLogoHover = fs.readFileSync(`${__dirname}/../images/coffeeLogoHover.png`);
 const background = fs.readFileSync(`${__dirname}/../images/background.png`);
 
 const getIndex = (request, response) => {
@@ -17,13 +18,19 @@ const getCSS = (request, response) => {
   response.end();
 };
 
-const getImages = (request, response) => {
+const getLogo = (request, response) => {
     response.writeHead(200, { 'Content-Type': 'image/png' });
     response.write(coffeeLogo);
     response.end();
 };
 
-const getImagesBG = (request, response) => {
+const getLogoHover = (request, response) => {
+    response.writeHead(200, { 'Content-Type': 'image/png' });
+    response.write(coffeeLogoHover);
+    response.end();
+};
+
+const getBG = (request, response) => {
     response.writeHead(200, { 'Content-Type': 'image/png' });
     response.write(background);
     response.end();
@@ -32,6 +39,7 @@ const getImagesBG = (request, response) => {
 module.exports = {
   getIndex,
   getCSS,
-  getImages,
-  getImagesBG,
+  getLogo,
+  getLogoHover,
+  getBG,
 };

@@ -133,15 +133,17 @@ const addCoffee = (request, response, body) => {
     return respondJSONMeta(request, response, responseCode);
   }
 
+  //update data
   coffee.push({
     name: body.name,
     shop: body.shop,
-    description: body.description,
     coffeetype: body.coffeetype,
+    description: body.description,
     price: body.price,
     rating: body.rating,
   });
 
+  //response lets user know something is added to view responses
   responseJSON.message = 'Added coffee to the database!';
   return respondJSON(request, response, responseCode, responseJSON);
 };

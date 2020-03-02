@@ -20,8 +20,9 @@ const urlStruct = {
     '/style.css': htmlHandler.getCSS,
     '/getCoffee': jsonHandler.getCoffee,
     '/coffeeData': jsonHandler.getCoffeeData,
-    '/getImages': htmlHandler.getImages,
-    '/getImagesBG': htmlHandler.getImagesBG,
+    '/getLogo': htmlHandler.getLogo,
+    '/getLogoHover': htmlHandler.getLogoHover,
+    '/getBG': htmlHandler.getBG,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
