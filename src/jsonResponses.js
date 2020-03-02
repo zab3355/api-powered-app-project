@@ -51,7 +51,9 @@ const getCoffeeData = (request, response) => {
   respondJSON(request, response, 200, responseJSON);
 };
 
-const getCoffeeDataMeta = (request, response) => respondJSONMeta(request, response, 200);
+const getCoffeeDataMeta = (request, response) => {
+    respondJSONMeta(request, response, 200);
+};
 
 // add a coffee drink to the list
 const addCoffee = (request, response, body) => {
