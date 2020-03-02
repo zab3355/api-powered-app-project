@@ -51,9 +51,7 @@ const getCoffeeData = (request, response) => {
   respondJSON(request, response, 200, responseJSON);
 };
 
-const getCoffeeDataMeta = (request, response) => {
-    respondJSONMeta(request, response, 200);
-};
+const getCoffeeDataMeta = (request, response) => respondJSONMeta(request, response, 200);
 
 // add a coffee drink to the list
 const addCoffee = (request, response, body) => {
@@ -78,7 +76,7 @@ const addCoffee = (request, response, body) => {
   //Checks if update is required by searching if the data exists
   let coffeeList = 0;
   for (let x = 0; x < coffee.length; x++) {
-    if (coffee[x] === body.name && coffee[x].shop === body.shop) {
+    if (coffee[x] === body.name && coffee[x].coffeetype === body.coffeetype) {
       responseCode = 204;
       coffeeList = x;
       break;
@@ -112,6 +110,11 @@ const addCoffee = (request, response, body) => {
   responseJSON.message = 'Added coffee to the database!';
   return respondJSON(request, response, responseCode, responseJSON);
 };
+
+
+// if (responseCode === 201) {
+// responseJSON.message = 'Added coffee to the database!';
+//   return respondJSON(request, response, responseCode, responseJSON);
 
 // not found response
 const notFound = (request, response) => {
