@@ -76,12 +76,13 @@ const addCoffee = (request, response, body) => {
   //Checks if update is required by searching if the data exists
   let coffeeList = -1;
   for (let x = 0; x < coffee.length; x++) {
-    if (coffee[x] === body.name && coffee[x].shop === body.shop && coffee[x].coffeetype === body.coffeetype) {
+    if (coffee[x].shop === body.shop && coffee[x].coffeetype === body.coffeetype) {
       responseCode = 204;
       coffeeList = x;
       break;
     }
-  } 
+  }
+    
 
   //updates JSON data if data is modified
   if (responseCode === 204) {
@@ -126,7 +127,6 @@ const notFoundMeta = (request, response) => {
   // 404 is returned
   respondJSONMeta(request, response, 404);
 };
-
 
 // module exports
 module.exports = {
